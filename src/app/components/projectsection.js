@@ -40,31 +40,31 @@ const ProjectSection = () => {
 
     const handleProjectClick = (id) => {
         setSelectedProject(id);
-    };
+    }
 
     const handleClose = () => {
         setSelectedProject(null);
-    };
+    }
 
     const handleNext = () => {
-        const currentIndex = projects.findIndex((p) => p.id === selectedProject);
+        const currentIndex = projects.findIndex((project) => p.id === selectedProject);
         if (currentIndex === -1) {
             return null;
         }
 
         const nextIndex = (currentIndex + 1) % projects.length;
         setSelectedProject(projects[nextIndex].id);
-    };
+    }
 
     const handlePrev = () => {
-        const currentIndex = projects.findIndex(p => p.id === selectedProject.id);
+        const currentIndex = projects.findIndex((project) => project.id === selectedProject);
         if (currentIndex === -1) {
             return null;
         }
 
         const prevIndex = (currentIndex - 1 + projects.length) % projects.length;
         setSelectedProject(projects[prevIndex].id);
-    };
+    }
 
     return (
         <section id="projects" className="px-4 py-32 sm:px-6 lg:px-8">
@@ -97,7 +97,7 @@ const ProjectSection = () => {
             {
                 selectedProject && (
                     <ProjectModel 
-                        project={projects.find(p => p.id === selectedProject)}
+                        project={projects.find(project => project.id === selectedProject)}
                         onClose={handleClose}
                         onNext={handleNext}
                         onPrev={handlePrev}
