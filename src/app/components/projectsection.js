@@ -1,6 +1,6 @@
 "use client";
 import ProjectModel from "./ProjectModel";
-import { use, useState } from "react";
+import { useState } from "react";
 const ProjectSection = () => {
     const projects = [
         {
@@ -47,7 +47,7 @@ const ProjectSection = () => {
     }
 
     const handleNext = () => {
-        const currentIndex = projects.findIndex((project) => p.id === selectedProject);
+        const currentIndex = projects.findIndex((project) => project.id === selectedProject);
         if (currentIndex === -1) {
             return null;
         }
@@ -76,9 +76,10 @@ const ProjectSection = () => {
                         key={index} className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700/50 hover:border-purple-500 transition-colors hover:shadow-sm text-left">
 
                         <div className="flex flex-col h-full">
-                            <h3 className="text-lg font-semibold text-shadow-white mb-2">{project.title}
+                            <h3 className="text-lg font-semibold text-shadow-white mb-2">
+                                {project.title}
                             </h3>
-                            <div className="mt-auto flex flex-wrap gap-1">
+                            <div className="flex flex-wrap gap-1 mt-auto">
                                 {
                                     project.tags.map((tag, index) => (
                                         <span 
