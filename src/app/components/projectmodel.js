@@ -11,6 +11,36 @@ export default function ProjectModel({ project, onClose, onNext, onPrev }) {
                     <X size={24}/>
                 </button>
               </div>
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="md:w-1/2 space-y-4">
+                  <p className="text-gray-300">{project.description}</p>
+                  <p className="text-gray-300">{project.fulldescription}</p>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-300 mb-2">Tech Stacks:</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {project.techstacks.map((tech, index) => (
+                        <span 
+                          key={index} 
+                          className="px-3 py-1 text-sm rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                          {tech}
+                        </span>
+                      ))}
+                    <h3 className="text-lg font-semibold text-gray-300">Github Link:</h3>
+                    <a href={project.links.github} className="text-purple-300 hover:underline">
+                      {project.links.github}
+                    </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative w-full h-64 md:w-1/2">
+                  <Image 
+                    src={project.image} 
+                    alt={project.title} 
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+              </div>
             </div>
         </div>
     );
