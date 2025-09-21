@@ -1,11 +1,22 @@
 import Image from "next/image";
-import { X } from 'lucide-react';
+import { X, ChevronRight, ChevronLeft } from 'lucide-react';
+import { useRef } from "react";
 
 export default function ProjectModel({ project, onClose, onNext, onPrev }) {
+    const modalRef = useRef();
+
+    const handleClickOutside = (e) => {
+        if (modalRef.current === e.target) {
+            onClose();
+        }
+    }
+
     return (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
-            <div className="bg-gray-900/90 rounded-lg max-w-4xl w-11/12 max-h-[90vh] overflow-y-auto p-8 h-full">
-              <div className="flex justify-between items-center mb-4">
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50" 
+             onClick={handleClickOutside} 
+             ref={modalRef}>
+            <div ref={modalRef} className="bg-gray-900/90 rounded-lg max-w-4xl w-11/12 max-h-[90vh] overflow-y-auto p-11 h-full" onClick={(e) => e.stopPropagation()}>
+              <div className="flex justify-between mb-3">
                 <h2 className="text-2xl font-bold text-purple-50">{project.title}</h2>
                 <button onClick={onClose} className="text-purple-50 hover:text-purple-400 rounded-full p-2 bg-gray-800/50 hover:bg-gray-800/70 transition-colors">
                     <X size={24}/>
@@ -25,10 +36,12 @@ export default function ProjectModel({ project, onClose, onNext, onPrev }) {
                           {tech}
                         </span>
                       ))}
-                    <h3 className="text-lg font-semibold text-gray-300">Github Link:</h3>
-                    <a href={project.links.github} className="text-purple-300 hover:underline">
-                      {project.links.github}
-                    </a>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-300">Github Link:</h3>
+                      <a href={project.links.github} className="text-purple-300 hover:underline">
+                        {project.links.github}
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -39,6 +52,14 @@ export default function ProjectModel({ project, onClose, onNext, onPrev }) {
                     layout="fill"
                     objectFit="cover"
                   />
+                </div>
+                <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-11/12 max-w-4xl">
+                  <button onClick={onPrev} className="text-purple-50 hover:text-purple-400 rounded-full p-2 bg-gray-800/50 hover:bg-gray-800/70 transition-colors -translate-x-[110%]">
+                    <ChevronLeft size={22}/>
+                  </button>
+                  <button onClick={onNext} className="text-purple-50 hover:text-purple-400 rounded-full p-2 bg-gray-800/50 hover:bg-gray-800/70 transition-colors -translate-x-[125%]">
+                    <ChevronRight size={22}/>
+                  </button>
                 </div>
               </div>
             </div>
